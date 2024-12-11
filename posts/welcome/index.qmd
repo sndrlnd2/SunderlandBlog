@@ -1,12 +1,45 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2024-12-06"
-categories: [news]
+title: "Student Depression Dataset"
+author: "Gloria Sunderland"
+date: "2024-12-11"
+categories: [data analysis]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+# Student Depression Dataest
 
-![](thumbnail.jpg)
+Data Source: [[https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data]{.underline}](https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data)
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+---
+
+Data Description/ Variables of Interest:
+
+-   ID: Unique Student Identifier
+
+-   Age: Age of student
+
+-   Gender: Gender of student (Male, Female)
+
+-   CGPA: Grade Point Average
+
+-   Sleep Duration: Average daily sleep duration
+
+-   Academic Pressure: Scale from 1 (least pressure) to 5 (most pressure)
+
+-   Study Satisfaction: Scale from 1 (least satisfied) to 5 (most satisfied)
+
+---
+
+Research Question: How do sleep duration and academic pressure affect CGPA and study satisfaction among students?
+
+---
+
+```{r}
+#Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(car)
+library(tidyverse)
+
+#Load in data
+StudentPerformanceData <- read.csv("/Users/gloriasunderland/Downloads/HW11-2.Q1.csv")
+```

@@ -11,7 +11,7 @@
     "href": "posts/About Me/index.html",
     "title": "About Me",
     "section": "",
-    "text": "My name is Gloria Sunderland, and I’m a first-year Ph.D. student in Animal Sciences at the University of Illinois Urbana-Champaign (UIUC). My current research, under the guidance of Professor Rodriguez-Zas, explores the influence of morphine and sex on genetic expression in the hypothalamus.\nOutside of the lab, I love going for walks, knitting/ crocheting, and recently diving into cooking."
+    "text": "My name is Gloria Sunderland, and I’m a first-year Ph.D. student in Animal Sciences at the University of Illinois Urbana-Champaign (UIUC). My current research, under the guidance of Professor Rodriguez Zas, explores the influence of morphine and sex on genetic expression in the hypothalamus.\nOutside of the lab, I love going for walks, knitting/ crocheting, and recently diving into cooking."
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -23,15 +23,15 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "title": "Student Depression Dataset",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "Student Depression Dataest\nData Source: https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data\n\nData Description/ Variables of Interest:\n\nID: Unique Student Identifier\nAge: Age of student\nGender: Gender of student (Male, Female)\nCGPA: Grade Point Average\nSleep Duration: Average daily sleep duration\nAcademic Pressure: Scale from 1 (least pressure) to 5 (most pressure)\nStudy Satisfaction: Scale from 1 (least satisfied) to 5 (most satisfied)\n\n\nResearch Question: How do sleep duration and academic pressure affect CGPA and study satisfaction among students?"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Sunderland Blog",
+    "title": "IS 407 Blog",
     "section": "",
-    "text": "About Me\n\n\n\n\n\n\nAbout Me\n\n\n\n\n\n\n\n\n\nDec 10, 2024\n\n\nGloria Sunderland\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 9, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 6, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Student Depression Dataset\n\n\n\n\n\n\ndata analysis\n\n\n\n\n\n\n\n\n\nDec 11, 2024\n\n\nGloria Sunderland\n\n\n\n\n\n\n\n\n\n\n\n\nAbout Me\n\n\n\n\n\n\nAbout Me\n\n\n\n\n\n\n\n\n\nDec 10, 2024\n\n\nGloria Sunderland\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 9, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\nNo matching items"
   }
 ]

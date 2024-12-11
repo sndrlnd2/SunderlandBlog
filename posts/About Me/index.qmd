@@ -6,8 +6,8 @@ categories: [About Me]
 image: "Kingfisher.jpg"
 ---
 
-My name is Gloria Sunderland, and I’m a first-year Ph.D. student in Animal Sciences at the University of Illinois Urbana-Champaign (UIUC). My current research, under the guidance of Professor Rodriguez-Zas, explores the influence of morphine and sex on genetic expression in the hypothalamus.
+My name is Gloria Sunderland, and I’m a first-year Ph.D. student in Animal Sciences at the University of Illinois Urbana-Champaign (UIUC). My current research, under the guidance of Professor Rodriguez Zas, explores the influence of morphine and sex on genetic expression in the hypothalamus.
 
 Outside of the lab, I love going for walks, knitting/ crocheting, and recently diving into cooking.
 
----
+------------------------------------------------------------------------

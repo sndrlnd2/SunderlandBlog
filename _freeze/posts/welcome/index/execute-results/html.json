@@ -1,0 +1,15 @@
+{
+  "hash": "6636db2759ffdd6147f5c3b827c06964",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Student Depression Dataset\"\nauthor: \"Gloria Sunderland\"\ndate: \"2024-12-11\"\ncategories: [data analysis]\n---\n\n\n# Student Depression Dataest\n\nData Source: [[https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data]{.underline}](https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data)\n\n---\n\nData Description/ Variables of Interest:\n\n-   ID: Unique Student Identifier\n\n-   Age: Age of student\n\n-   Gender: Gender of student (Male, Female)\n\n-   CGPA: Grade Point Average\n\n-   Sleep Duration: Average daily sleep duration\n\n-   Academic Pressure: Scale from 1 (least pressure) to 5 (most pressure)\n\n-   Study Satisfaction: Scale from 1 (least satisfied) to 5 (most satisfied)\n\n---\n\nResearch Question: How do sleep duration and academic pressure affect CGPA and study satisfaction among students?\n\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#Load necessary libraries\nlibrary(dplyr)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttaching package: 'dplyr'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n```\n\n\n:::\n\n```{.r .cell-code}\nlibrary(ggplot2)\nlibrary(car)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLoading required package: carData\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttaching package: 'car'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following object is masked from 'package:dplyr':\n\n    recode\n```\n\n\n:::\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.3     ✔ tibble    3.2.1\n✔ purrr     1.0.2     ✔ tidyr     1.3.1\n✔ readr     2.1.5     \n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n✖ car::recode()   masks dplyr::recode()\n✖ purrr::some()   masks car::some()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n\n\n:::\n\n```{.r .cell-code}\n#Load in data\nStudentPerformanceData <- read.csv(\"/Users/gloriasunderland/Downloads/HW11-2.Q1.csv\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

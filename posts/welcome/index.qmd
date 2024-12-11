@@ -34,12 +34,6 @@ Research Question: How do sleep duration and academic pressure affect CGPA and s
 ---
 
 ```{r}
-#Load necessary libraries
-library(dplyr)
-library(ggplot2)
-library(car)
-library(tidyverse)
-
-#Load in data
-StudentPerformanceData <- read.csv("/Users/gloriasunderland/Downloads/HW11-2.Q1.csv")
+#| include: false
+data <- read.csv("/Users/gloriasunderland/IS407/HW3_SunderlandBlog/data/StudentPerformanceFactors.csv")
 ```

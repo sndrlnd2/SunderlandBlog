@@ -9,7 +9,7 @@ categories: [data analysis]
 
 Data Source: [[https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data]{.underline}](https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data)
 
----
+------------------------------------------------------------------------
 
 Data Description/ Variables of Interest:
 
@@ -19,7 +19,7 @@ Data Description/ Variables of Interest:
 
 -   Gender: Gender of student (Male, Female)
 
--   CGPA: Grade Point Average
+-   CGPA: Grade Point Average, or measure of Academic Success
 
 -   Sleep Duration: Average daily sleep duration
 
@@ -27,13 +27,94 @@ Data Description/ Variables of Interest:
 
 -   Study Satisfaction: Scale from 1 (least satisfied) to 5 (most satisfied)
 
----
+-   Depression: Does the student feel depressed (Yes/No)
 
-Research Question: How do sleep duration and academic pressure affect CGPA and study satisfaction among students?
+------------------------------------------------------------------------
 
----
+**Research Question**: How do sleep duration and academic pressure affect CGPA and study satisfaction among students?
+
+------------------------------------------------------------------------
+
+# 1. Preparing the data & Visualizing the variables
 
 ```{r}
 #| include: false
-data <- read.csv("/Users/gloriasunderland/IS407/HW3_SunderlandBlog/data/StudentPerformanceFactors.csv")
+#load in data
+data <- read.csv("/Users/gloriasunderland/IS407/HW3_SunderlandBlog/data/Student Depression Dataset.csv")
+
+#load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(tidymodels)
+library(corrplot)
+
+#check for missing values
+colSums(is.na(data))
+
+#remove rows with missing values
+data <- na.omit(data)
 ```
+
+```{r}
+#| include: false
+#recode Sleep.Duration to be numeric
+#check levels of the variable
+unique(data$Sleep.Duration)
+
+#Recode Sleep.Duration variable
+data$Sleep <- ifelse(data$Sleep.Duration == "Less than 5 hours", 1,
+                        ifelse(data$Sleep.Duration == "5-6 hours", 2,
+                        ifelse(data$Sleep.Duration == "7-8 hours", 3,
+                        ifelse(data$Sleep.Duration == "More than 8 hours", 4,
+                        NA)))) # Handle "Others" or missing as NA
+```
+
+```{r, warnings=FALSE, message=FALSE, results='hide'}
+#| echo: false
+#Box plot of CGPA by Sleep Duration
+ggplot(data, aes(x = factor(Sleep), y = CGPA)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "CGPA by Sleep Duration", x = "Sleep Duration", y = "CGPA")
+```
+
+**Figure 1**. Box plot showing the distribution of CGPA across sleep duration categories. There is no clear relationship, as the median CGPA stays relatively consistent across all sleep duration groups. This suggests that sleep duration may not have a strong impact on CGPA.
+
+```{r, warnings=FALSE, message=FALSE, results='hide'}
+#| echo: false
+#Scatter plot of academic pressure vs. CGPA
+ggplot(data, aes(x = Academic.Pressure, y = CGPA)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "purple") +
+  labs(title = "Academic Pressure vs. CGPA", x = "Academic Pressure", y = "CGPA")
+
+```
+
+**Figure 2**. Scatter plot showing relationship between academic pressure and CGPA. There appears to be a slight trend, with higher academic pressure associated with slightly lower CGPA, although the pattern is not strong.
+
+------------------------------------------------------------------------
+
+# 2. Statistical Analysis
+
+### Correlation
+
+```{r, warning=FALSE, results='hide', fig.keep='all', message=FALSE}
+#| echo: false
+#calculate correlation between Academic pressure/ Sleep and CGPA
+cor(data$Academic.Pressure, data$CGPA, use = "complete.obs")
+cor(data$Sleep, data$CGPA, use = "complete.obs")
+
+#Make correlation matrix
+correlation_variables <- data %>% select(Academic.Pressure, CGPA, Study.Satisfaction, Sleep)
+correlation_matrix <- cor(correlation_variables, use = "complete.obs")
+#Plot correlation matrix
+corrplot(correlation_matrix, 
+         method = "color", 
+         type = "lower", 
+         addCoef.col = "black", 
+         tl.col = "black", 
+         tl.srt = 45, 
+         col = colorRampPalette(c("purple", "white", "lightblue"))(200))
+```
+
+**Figure 3.** Correlation matrix showing relationship between variables of interest: Academic Pressure, CGPA, Study Satisfaction, and Sleep Duration. The values range from -1 to 1 (with 0 indicating no correlation). The matrix shows weak correlations among the variables. Academic Pressure stands out as it has a slight negative correlation with Study Satisfaction (-0.11) and CGPA (-0.02).

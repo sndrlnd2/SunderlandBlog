@@ -1,0 +1,13 @@
+---
+title: "Second Analysis"
+author: "Gloria Sunderland"
+date: "2024-12-12"
+categories: [data analysis]
+image: "image.jpg"
+---
+
+This is a post with executable code.
+
+```{r}
+
+```

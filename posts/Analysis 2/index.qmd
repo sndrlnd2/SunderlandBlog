@@ -3,7 +3,6 @@ title: "Consumption of Alcohol in Russia"
 author: "Gloria Sunderland"
 date: "2024-12-12"
 categories: [data analysis]
-image: "image.jpg"
 ---
 
 Data Source: <https://www.kaggle.com/datasets/scibearia/consumption-of-alcohol-in-russia-2017-2023>
@@ -144,6 +143,4 @@ model <- lm(Total.alcohol.consumption..in.liters.of.pure.alcohol.per.capita. ~ V
 summary(model)
 ```
 
-**Model 1.** Linear regression model predicting total alcohol consumption based on vodka, beer, and wine consumption. The results indicate that vodka consumption has the strongest positive relationship with total alcohol consumption (coefficient = 0.47), followed by wine (0.33) and beer (0.056). The model explains 99.17% of the variance in total alcohol consumption (R-squared = 0.9917), demonstrating an excellent fit. All predictors are statistically significant, highlighting their importance in driving total alcohol consumption.
-
----
+**Model 1.** Linear regression model predicting total alcohol consumption based on the consumption of vodka, beer, wine, sparkling wine, brandy, liqueurs, and cider. The results indicate that vodka (coefficient = 0.4293), beer (0.0550), wine (0.2114), brandy (0.4388), liqueurs (0.3422), and sparkling wine (0.0653) all have statistically significant positive relationships with total alcohol consumption (p \< 0.001), while cider does not show a significant effect (p = 0.1862). The model explains 99.53% of the variance in total alcohol consumption (R-squared = 0.9953), suggesting that most of the variation in total alcohol consumption can be attributed to these beverage categories.

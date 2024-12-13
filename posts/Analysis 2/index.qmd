@@ -1,13 +1,149 @@
 ---
-title: "Second Analysis"
+title: "Consumption of Alcohol in Russia"
 author: "Gloria Sunderland"
 date: "2024-12-12"
 categories: [data analysis]
 image: "image.jpg"
 ---
 
-This is a post with executable code.
+Data Source: <https://www.kaggle.com/datasets/scibearia/consumption-of-alcohol-in-russia-2017-2023>
+
+------------------------------------------------------------------------
+
+Data Description: Data set includes alcohol consumption information across the years 2017-2023 for different alcohol types including wine, beer, vodka, sparkling wine, brandy, cider, liqueurs.
+
+------------------------------------------------------------------------
+
+**Research Questions**
+
+1.  How has the consumption of different types of alcohol changed over time in Russia?
+2.  Can the consumption of one type of alcohol (ex. vodka) predict the consumption of other types (ex. beer, wine, or total alcohol)?
 
 ```{r}
+#| include: false
+#load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(corrplot)
+
+#read in dataset
+Russia_data <- read.csv("/Users/gloriasunderland/IS407/HW3_SunderlandBlog/data/Consumption of alcoholic beverages in Russia 2017-2023.csv")
+```
+
+# Research Question 1
+
+### Data visualization
+
+```{r, warnings=FALSE, results='hide', fig.keep='all', message=FALSE}
+#| echo: false
+#restructure data for visualization (pivot long)
+long_data <- Russia_data %>%
+  pivot_longer(cols = c(Wine, Beer, Vodka, Sparkling.wine, Brandy, Сider, Liqueurs),
+               names_to = "Alcohol_Type", 
+               values_to = "Consumption")
+
+#Line plot of alcohol consumption over time
+ggplot(long_data, aes(x = Year, y = Consumption, color = Alcohol_Type)) +
+  geom_line(stat = "summary", fun = "mean", linewidth = 1) +
+  labs(
+    title = "Alcohol Consumption in Russia (2017-2023)",
+    x = "Year",
+    y = "Average Consumption (liters)",
+    color = "Alcohol Type"
+  ) +
+  theme_minimal()
 
 ```
+
+**Figure 1**. Line plot of trends in Alcohol Consumption in Russia (2017–2023) across all alcohol types show that beer consumption remains consistently high with only a slight upward trend over time, with the other alcohol types appearing stable across time.
+
+---
+
+```{r, warnings=FALSE, results='hide', fig.keep='all', message=FALSE}
+#| echo: false
+#Line plot of alcohol consumption over time, excluding beer
+#take Beer from the dataset
+filtered_data <- long_data %>%
+  filter(Alcohol_Type != "Beer")
+
+#Plot the trends without beer
+ggplot(filtered_data, aes(x = Year, y = Consumption, color = Alcohol_Type)) +
+  geom_line(stat = "summary", fun = "mean", linewidth = 1) +
+  labs(
+    title = "Trends in Alcohol Consumption in Russia (2017-2023) (Excluding Beer)",
+    x = "Year",
+    y = "Average Consumption (liters)",
+    color = "Alcohol Type"
+  ) +
+  theme_minimal()
+```
+
+**Figure 2.** Trends in Alcohol Consumption in Russia (2017–2023), excluding beer, highlight a very slight increase in the consumption of vodka, wine, and liqueuers. Other alcohol types, such as sparkling wine and cider, show minimal changes.
+
+---
+
+# Research Question 2
+
+### Data Visualization
+
+```{r, warnings=FALSE, results='hide', fig.keep='all', message=FALSE}
+#| echo: false
+#Scatter plot of vodka vs ber consumption
+ggplot(Russia_data, aes(x = Vodka, y = Beer)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = TRUE, color = "lightblue") +
+  labs(
+    title = "Relationship Between Vodka and Beer Consumption",
+    x = "Vodka Consumption (liters)",
+    y = "Beer Consumption (liters)"
+  ) +
+  theme_minimal()
+
+```
+
+**Figure 3.** Scatter plot showing relationship between vodka and beer consumption. A positive trend here suggests that higher consumption of vodka is associated with higher beer consumption. This suggests a relationship between the consumption of different types of alcohol. However, statistical analysis is needed to fully understand the nature of this relationship.
+
+---
+
+### Correlation Matrix
+
+```{r, warning=FALSE, results='hide', fig.keep='all', message=FALSE}
+#| echo: false
+
+#make correlation matrix between all alcohol types
+#select only alcohol type columns
+alcohol_data <- Russia_data %>%
+  select(Wine, Beer, Vodka, Sparkling.wine, Brandy, Сider, Liqueurs)
+
+#calculate the correlation matrix
+correlation_matrix <- cor(alcohol_data, use = "complete.obs")
+
+#plot correlation matrix
+corrplot(correlation_matrix, 
+         method = "color",      
+         type = "lower",        
+         addCoef.col = "black", 
+         tl.col = "black",      
+         tl.srt = 45,           
+         col = colorRampPalette(c("pink", "white", "lightblue"))(200),
+         title = "Correlation Matrix of Alcohol Types",
+         mar = c(0, 0, 2, 0)) 
+```
+
+**Figure 4.** Correlation matrix showing the relationships between different alcohol beverages. There are strong positive correlations between wine and sparkling wine (0.82), brandy and sparkling wine (0.87), and vodka and brandy (0.76), suggesting that higher consumption of one is associated with higher consumption of the other. Moderate correlations are also present between beer and other alcohol types, such as vodka (0.68).
+
+---
+
+### Statistical Analysis
+
+```{r}
+#| echo: false
+#linear regression model to predict total alcohol consumption from vodka, beer, and wine
+model <- lm(Total.alcohol.consumption..in.liters.of.pure.alcohol.per.capita. ~ Vodka + Beer + Wine + Sparkling.wine + Brandy + Liqueurs + Сider, data = Russia_data)
+summary(model)
+```
+
+**Model 1.** Linear regression model predicting total alcohol consumption based on vodka, beer, and wine consumption. The results indicate that vodka consumption has the strongest positive relationship with total alcohol consumption (coefficient = 0.47), followed by wine (0.33) and beer (0.056). The model explains 99.17% of the variance in total alcohol consumption (R-squared = 0.9917), demonstrating an excellent fit. All predictors are statistically significant, highlighting their importance in driving total alcohol consumption.
+
+---

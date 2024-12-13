@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Harlow Malloc">
-<meta name="dcterms.date" content="2024-12-09">
+<meta name="author" content="Gloria Sunderland">
+<meta name="dcterms.date" content="2024-12-12">
 
-<title>IS 407 Sunderland Blog - Second Analysis</title>
+<title>IS 407 Sunderland Blog - Consumption of Alcohol in Russia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,11 +115,9 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Post With Code</h1>
+      <h1 class="title">Consumption of Alcohol in Russia</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">analysis</div>
+                <div class="quarto-category">data analysis</div>
               </div>
                   </div>
   </div>
@@ -130,14 +128,14 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Harlow Malloc </p>
+               <p>Gloria Sunderland </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 9, 2024</p>
+        <p class="date">December 12, 2024</p>
       </div>
     </div>
     
@@ -156,14 +154,106 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a post with executable code.</p>
+<p>Data Source: <a href="https://www.kaggle.com/datasets/scibearia/consumption-of-alcohol-in-russia-2017-2023" class="uri">https://www.kaggle.com/datasets/scibearia/consumption-of-alcohol-in-russia-2017-2023</a></p>
+<hr>
+<p>Data Description: Data set includes alcohol consumption information across the years 2017-2023 for different alcohol types including wine, beer, vodka, sparkling wine, brandy, cider, liqueurs.</p>
+<hr>
+<p><strong>Research Questions</strong></p>
+<ol type="1">
+<li>How has the consumption of different types of alcohol changed over time in Russia?</li>
+<li>Can the consumption of one type of alcohol (ex. vodka) predict the consumption of other types (ex. beer, wine, or total alcohol)?</li>
+</ol>
+<section id="research-question-1" class="level1">
+<h1>Research Question 1</h1>
+<section id="data-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="data-visualization">Data visualization</h3>
+<div class="cell" data-warnings="false">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Figure 1</strong>. Line plot of trends in Alcohol Consumption in Russia (2017–2023) across all alcohol types show that beer consumption remains consistently high with only a slight upward trend over time, with the other alcohol types appearing stable across time.</p>
+<hr>
+<div class="cell" data-warnings="false">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Figure 2.</strong> Trends in Alcohol Consumption in Russia (2017–2023), excluding beer, highlight a very slight increase in the consumption of vodka, wine, and liqueuers. Other alcohol types, such as sparkling wine and cider, show minimal changes.</p>
+<hr>
+</section>
+</section>
+<section id="research-question-2" class="level1">
+<h1>Research Question 2</h1>
+<section id="data-visualization-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-visualization-1">Data Visualization</h3>
+<div class="cell" data-warnings="false">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Figure 3.</strong> Scatter plot showing relationship between vodka and beer consumption. A positive trend here suggests that higher consumption of vodka is associated with higher beer consumption. This suggests a relationship between the consumption of different types of alcohol. However, statistical analysis is needed to fully understand the nature of this relationship.</p>
+<hr>
+</section>
+<section id="correlation-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Figure 4.</strong> Correlation matrix showing the relationships between different alcohol beverages. There are strong positive correlations between wine and sparkling wine (0.82), brandy and sparkling wine (0.87), and vodka and brandy (0.76), suggesting that higher consumption of one is associated with higher consumption of the other. Moderate correlations are also present between beer and other alcohol types, such as vodka (0.68).</p>
+<hr>
+</section>
+<section id="statistical-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>
+Call:
+lm(formula = Total.alcohol.consumption..in.liters.of.pure.alcohol.per.capita. ~ 
+    Vodka + Beer + Wine, data = Russia_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.10772 -0.13759  0.01251  0.14529  0.73872 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.0278246  0.0269928   1.031    0.303    
+Vodka       0.4724764  0.0053965  87.552   &lt;2e-16 ***
+Beer        0.0559735  0.0007427  75.361   &lt;2e-16 ***
+Wine        0.3270103  0.0078312  41.757   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.224 on 591 degrees of freedom
+Multiple R-squared:  0.9917,    Adjusted R-squared:  0.9917 
+F-statistic: 2.353e+04 on 3 and 591 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<p><strong>Model 1.</strong> Linear regression model predicting total alcohol consumption based on vodka, beer, and wine consumption. The results indicate that vodka consumption has the strongest positive relationship with total alcohol consumption (coefficient = 0.47), followed by wine (0.33) and beer (0.056). The model explains 99.17% of the variance in total alcohol consumption (R-squared = 0.9917), demonstrating an excellent fit. All predictors are statistically significant, highlighting their importance in driving total alcohol consumption.</p>
+<hr>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

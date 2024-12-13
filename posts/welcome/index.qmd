@@ -1,11 +1,11 @@
 ---
-title: "Student Depression Dataset"
+title: "Student Academic Lifestyle Dataset"
 author: "Gloria Sunderland"
 date: "2024-12-11"
 categories: [data analysis]
 ---
 
-# Student Depression Dataest
+# Student Academic Lifestyle Dataset
 
 Data Source: [[https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data]{.underline}](https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data)
 
@@ -96,7 +96,7 @@ ggplot(data, aes(x = Academic.Pressure, y = CGPA)) +
 
 # 2. Statistical Analysis
 
-### Correlation
+### Correlation Matrix
 
 ```{r, warning=FALSE, results='hide', fig.keep='all', message=FALSE}
 #| echo: false
@@ -118,3 +118,42 @@ corrplot(correlation_matrix,
 ```
 
 **Figure 3.** Correlation matrix showing relationship between variables of interest: Academic Pressure, CGPA, Study Satisfaction, and Sleep Duration. The values range from -1 to 1 (with 0 indicating no correlation). The matrix shows weak correlations among the variables. Academic Pressure stands out as it has a slight negative correlation with Study Satisfaction (-0.11) and CGPA (-0.02).
+
+------------------------------------------------------------------------
+
+### Linear Regression
+
+**Model 1**. Linear regression to predict CGPA from Sleep duration and Academic pressure.
+
+```{r}
+#| echo: false
+#Fitting liner regression model to predict CGPA
+CGPA_model <- lm(CGPA ~ Sleep.Duration + Academic.Pressure, data = data)
+summary(CGPA_model)
+
+```
+
+This linear regression model looks at the relationship between CGPA, Sleep Duration, and Academic Pressure.
+
+The intercept suggests that students with the reference Sleep Duration (5-6 hours) and no Academic Pressure have an average CGPA of 7.76. Sleep Duration categories mostly do not significantly impact CGPA, except for 'More than 8 hours,' which is associated with a significant decrease of 0.083 in CGPA (p = 0.0018).
+
+Academic Pressure shows a small but significant negative effect on CGPA, with every one-unit increase associated with a decrease of 0.024 (p = 0.0002).
+
+Importantly, the model explains only less than 0.1% of the variation in CGPA (R-squared = 0.0009943), meaning that other variables not included in the model play a more substantial role in predicting CGPA.
+
+------------------------------------------------------------------------
+
+**Model 2**. Linear regression to predict Study Satisfaction from Sleep duration and Academic pressure
+
+```{r}
+#| echo: false
+#Fitting model to predict Study Satisfaction from sleep duration and academic pressure
+model2 <- lm(Study.Satisfaction ~ Sleep.Duration + Academic.Pressure, data = data)
+summary(model2)
+```
+
+This linear regression model looks at the relationship between Study Satisfaction, Sleep Duration, and Academic Pressure. The intercept indicates that students with the reference Sleep Duration (5-6 hours) and no Academic Pressure have an average Study Satisfaction score of 3.29.
+
+Sleep Duration categories do not significantly affect Study Satisfaction, as none of the categories show significant p-values. Academic Pressure, however, has a substantial and significant negative effect on Study Satisfaction, with each one-unit increase in Academic Pressure associated with a decrease of 0.109 in Study Satisfaction (p \< 2e-16).
+
+This model explains only 1.2% of the variation in Study Satisfaction (R-squared = 0.01244), meaning that other factors not included in the model contribute significantly to variations in Study Satisfaction.

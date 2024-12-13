@@ -9,7 +9,7 @@
 <meta name="author" content="Gloria Sunderland">
 <meta name="dcterms.date" content="2024-12-11">
 
-<title>IS 407 Sunderland Blog - Student Depression Dataset</title>
+<title>IS 407 Sunderland Blog - Student Academic Lifestyle Dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,8 +154,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="student-depression-dataest" class="level1">
-<h1>Student Depression Dataest</h1>
+<section id="student-depression-dataset" class="level1">
+<h1>Student Depression Dataset</h1>
 <p>Data Source: <a href="https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data"><u>https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data</u></a></p>
 <hr>
 <p>Data Description/ Variables of Interest:</p>
@@ -199,8 +199,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="statistical-analysis" class="level1">
 <h1>2. Statistical Analysis</h1>
-<section id="correlation" class="level3">
-<h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
+<section id="correlation-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -211,6 +211,73 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p><strong>Figure 3.</strong> Correlation matrix showing relationship between variables of interest: Academic Pressure, CGPA, Study Satisfaction, and Sleep Duration. The values range from -1 to 1 (with 0 indicating no correlation). The matrix shows weak correlations among the variables. Academic Pressure stands out as it has a slight negative correlation with Study Satisfaction (-0.11) and CGPA (-0.02).</p>
+<hr>
+</section>
+<section id="linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression">Linear Regression</h3>
+<p><strong>Model 1</strong>. Linear regression to predict CGPA from Sleep duration and Academic pressure.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CGPA ~ Sleep.Duration + Academic.Pressure, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.7639 -1.3519  0.1131  1.2642  2.4388 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      7.763893   0.027312 284.266  &lt; 2e-16 ***
+Sleep.Duration7-8 hours         -0.002731   0.025375  -0.108 0.914276    
+Sleep.DurationLess than 5 hours -0.046314   0.024703  -1.875 0.060823 .  
+Sleep.DurationMore than 8 hours -0.083029   0.026598  -3.122 0.001800 ** 
+Sleep.DurationOthers            -0.092559   0.347012  -0.267 0.789677    
+Academic.Pressure               -0.023930   0.006378  -3.752 0.000176 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.47 on 27892 degrees of freedom
+Multiple R-squared:  0.0009943, Adjusted R-squared:  0.0008152 
+F-statistic: 5.552 on 5 and 27892 DF,  p-value: 4.078e-05</code></pre>
+</div>
+</div>
+<p>This linear regression model looks at the relationship between CGPA, Sleep Duration, and Academic Pressure.</p>
+<p>The intercept suggests that students with the reference Sleep Duration (5-6 hours) and no Academic Pressure have an average CGPA of 7.76. Sleep Duration categories mostly do not significantly impact CGPA, except for ‘More than 8 hours,’ which is associated with a significant decrease of 0.083 in CGPA (p = 0.0018).</p>
+<p>Academic Pressure shows a small but significant negative effect on CGPA, with every one-unit increase associated with a decrease of 0.024 (p = 0.0002).</p>
+<p>Importantly, the model explains only less than 0.1% of the variation in CGPA (R-squared = 0.0009943), meaning that other variables not included in the model play a more substantial role in predicting CGPA.</p>
+<hr>
+<p><strong>Model 2</strong>. Linear regression to predict Study Satisfaction from Sleep duration and Academic pressure</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Study.Satisfaction ~ Sleep.Duration + Academic.Pressure, 
+    data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3075 -0.9804  0.0365  1.0545  2.2726 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      3.290638   0.025132 130.935   &lt;2e-16 ***
+Sleep.Duration7-8 hours         -0.009593   0.023349  -0.411    0.681    
+Sleep.DurationLess than 5 hours -0.018026   0.022731  -0.793    0.428    
+Sleep.DurationMore than 8 hours  0.016830   0.024475   0.688    0.492    
+Sleep.DurationOthers             0.165757   0.319311   0.519    0.604    
+Academic.Pressure               -0.109037   0.005869 -18.578   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.353 on 27892 degrees of freedom
+Multiple R-squared:  0.01244,   Adjusted R-squared:  0.01226 
+F-statistic: 70.26 on 5 and 27892 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>This linear regression model looks at the relationship between Study Satisfaction, Sleep Duration, and Academic Pressure. The intercept indicates that students with the reference Sleep Duration (5-6 hours) and no Academic Pressure have an average Study Satisfaction score of 3.29.</p>
+<p>Sleep Duration categories do not significantly affect Study Satisfaction, as none of the categories show significant p-values. Academic Pressure, however, has a substantial and significant negative effect on Study Satisfaction, with each one-unit increase in Academic Pressure associated with a decrease of 0.109 in Study Satisfaction (p &lt; 2e-16).</p>
+<p>This model explains only 1.2% of the variation in Study Satisfaction (R-squared = 0.01244), meaning that other factors not included in the model contribute significantly to variations in Study Satisfaction.</p>
 
 
 </section>
